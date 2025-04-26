@@ -22,7 +22,7 @@ function createServer() {
     const requestPath = pathname.replace('/file', '') || 'index.html';
     const realPath = path.join(__dirname, '..', 'public', requestPath);
 
-    if (!pathname.startsWith('/file/')) {
+    if (!(pathname === '/file' || pathname.startsWith('/file/'))) {
       res.statusCode = 400;
       res.setHeader('Content-Type', 'text/plain');
       res.end('Request url should start with /file/');
@@ -49,7 +49,7 @@ function createServer() {
     try {
       const file = fs.readFileSync(realPath);
 
-      res.setHeader('Content-Type', 'text/html');
+      res.setHeader('Content-Type', 'text/plain');
       res.statusCode = 200;
       res.end(file);
     } catch {
