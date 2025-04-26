@@ -22,15 +22,8 @@ function createServer() {
     const requestPath = pathname.replace('/file', '') || 'index.html';
     const realPath = path.join(__dirname, '..', 'public', requestPath);
 
-    if (!pathname.startsWith('/file')) {
-      res.statusCode = 400;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end('Request url should start with /file/');
-
-      return;
-    }
-
     if (!pathname.startsWith('/file/')) {
+      res.statusCode = 400;
       res.setHeader('Content-Type', 'text/plain');
       res.end('Request url should start with /file/');
 
